@@ -1,0 +1,33 @@
+[
+    {
+        "color": "#5319E7",
+        "labels": [
+            {
+                "icon": ":stethoscope:",
+                "name": "tests",
+                "text": "Focused on the test suite"
+            },
+            {
+                "icon": ":page_facing_up:",
+                "name": "docs"
+            }
+        ],
+        "name": "area"
+    },
+    {
+        "color": "#B60205",
+        "labels": [
+            {
+                "icon": ":cloud:",
+                "name": "explanation",
+                "text": "Diátaxis: understanding-oriented"
+            },
+            {
+                "icon": ":building_construction:",
+                "name": "howto",
+                "text": "Diátaxis: task-oriented"
+            }
+        ],
+        "name": "docs"
+    }
+]
