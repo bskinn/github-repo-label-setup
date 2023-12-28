@@ -49,19 +49,27 @@ def main(repo: str):
             )
 
             if get_resp.ok:
-                # Label found, so let's update in place
-                resp = rq.patch(
-                    API_URL_BASE + f"/{label_name}",
-                    headers=HEADERS,
-                    data=json.dumps(
-                        {
-                            "new_name": label_name,
-                            "description": f"{label.get('text', '')}",
-                            "color": color,
-                        }
-                    ),
-                )
-                action = "updated"
+                # Label found, so let's update in place, but only if
+                # we need to. We know the name isn't changing, so
+                # we only need to check the color and description
+                if (gr_json := get_resp.json())["description"] == label.get(
+                    "text", ""
+                ) and gr_json["color"] == color:
+                    resp = get_resp
+                    action = "unchanged"
+                else:
+                    resp = rq.patch(
+                        API_URL_BASE + f"/{label_name}",
+                        headers=HEADERS,
+                        data=json.dumps(
+                            {
+                                "new_name": label_name,
+                                "description": f"{label.get('text', '')}",
+                                "color": color,
+                            }
+                        ),
+                    )
+                    action = "updated"
             else:
                 # Not found, let's create
                 resp = rq.post(
