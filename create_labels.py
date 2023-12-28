@@ -28,11 +28,12 @@ def main(repo: str):
         "Accept": "application/vnd.github+json",
         "Authorization": f"Bearer {PAT}",
         "X-GitHub-Api-Version": "2022-11-28",
+        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
     }
 
     API_URL_BASE = f"https://api.github.com/repos/{repo}/labels"
 
-    labelsets = json.loads(Path("labels.json").read_text())
+    labelsets = json.loads(Path("labels.json").read_text(encoding="utf-8"))
 
     for labelset in labelsets:
         set_name = labelset["name"]
