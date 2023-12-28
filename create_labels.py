@@ -24,6 +24,14 @@ class LabelSet:
 def main(repo: str):
     PAT = os.environ.get("GITHUB_PAT")
 
+    HEADERS = {
+        "Accept": "application/vnd.github+json",
+        "Authorization": f"Bearer {PAT}",
+        "X-GitHub-Api-Version": "2022-11-28",
+    }
+
+    API_URL_BASE = f"https://api.github.com/repos/{repo}/labels"
+
     labelsets = json.loads(Path("labels.json").read_text())
 
     for labelset in labelsets:
@@ -32,25 +40,45 @@ def main(repo: str):
         labels = labelset["labels"]
 
         for label in labels:
-            resp = rq.post(
-                f"https://api.github.com/repos/{repo}/labels",
-                headers={
-                    "Accept": "application/vnd.github+json",
-                    "Authorization": f"Bearer {PAT}",
-                    "X-GitHub-Api-Version": "2022-11-28",
-                },
-                data=json.dumps(
-                    {
-                        "name": (
-                            label_name := f"{set_name}: {label['name']} {label['icon']}"
-                        ),
-                        "description": f"{label.get('text', '')}",
-                        "color": f"{color}",
-                    }
-                ),
+            label_name = f"{set_name}: {label['name']} {label['icon']}"
+
+            get_resp = rq.get(
+                API_URL_BASE + f"/{label_name}",
+                headers=HEADERS,
             )
 
-            print(f"Label '{label_name}' result: {resp.status_code} ({resp.reason})")
+            if get_resp.ok:
+                # Label found, so let's update in place
+                resp = rq.patch(
+                    API_URL_BASE + f"/{label_name}",
+                    headers=HEADERS,
+                    data=json.dumps(
+                        {
+                            "new_name": label_name,
+                            "description": f"{label.get('text', '')}",
+                            "color": color,
+                        }
+                    ),
+                )
+                action = "updated"
+            else:
+                # Not found, let's create
+                resp = rq.post(
+                    API_URL_BASE,
+                    headers=HEADERS,
+                    data=json.dumps(
+                        {
+                            "name": label_name,
+                            "description": f"{label.get('text', '')}",
+                            "color": color,
+                        },
+                    ),
+                )
+                action = "created"
+
+            print(
+                f"Label '{label_name}' result: {resp.status_code} ({resp.reason}) ({action})"  # noqa: E501
+            )
 
 
 if __name__ == "__main__":
