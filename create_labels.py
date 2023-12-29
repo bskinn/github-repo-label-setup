@@ -1,24 +1,9 @@
 import json
 import os
 import sys
-from dataclasses import dataclass
 from pathlib import Path
 
 import requests as rq
-
-
-@dataclass(kw_only=True)
-class Label:
-    name: str
-    icon: str
-    text: str = ""
-
-
-@dataclass(kw_only=True)
-class LabelSet:
-    name: str
-    color: str
-    labels: list[Label]
 
 
 def main(repo: str):
