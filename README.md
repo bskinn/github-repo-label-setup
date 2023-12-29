@@ -16,6 +16,8 @@ Get the labels you need in a few steps:
 
 And done!
 
+`repo-label-creator` created most of the labels on its own repository.
+
 If you want to curate your own set of preferred labels in `labels.json`, then
 fork the repo first and push your changes to the labels on your fork.
 
@@ -30,10 +32,13 @@ projects of substantial size, though, a structured approach to organizing and
 formatting the labels is important to maximize value and usability.
 
 While working on the [Quansight Labs website][labs site] I was exposed to
-[Tania Allard]'s style of GitHub label management, and liked it a lot. (Check
-out the [repo's labels][labs site labels] for an example.) I've since rolled a
-similar approach out to a handful of my repos, and I've liked it enough that I
-plan to keep using it.
+[Tania Allard]'s style of GitHub label management, and liked it a lot. Check out
+the [repo's labels][labs site labels] for an example.
+
+[...description of the key elements of the approach - color, prefixes, icons/emoji]
+
+I've since rolled a similar approach out to a handful of my repos, and I've
+liked it enough that I plan to keep using it.
 
 One drawback to this approach is how many labels you need to create from the
 start in order to put the framework in place. Seeing [...RESUME]
