@@ -5,6 +5,18 @@ from pathlib import Path
 
 import requests as rq
 
+DEFAULT_LABELS = [
+    "bug",
+    "documentation",
+    "duplicate",
+    "enhancement",
+    "good first issue",
+    "help wanted",
+    "invalid",
+    "question",
+    "wontfix",
+]
+
 
 def get_args():
     prs = ap.ArgumentParser(
@@ -41,6 +53,24 @@ def main():
 
     API_URL_BASE = f"https://api.github.com/repos/{repo}/labels"
 
+    # Cosmetic
+    print("")
+
+    # Removing the old labels
+    if args["delete_default"]:
+        print("Removing GitHub default labels...\n")
+        for default_label in DEFAULT_LABELS:
+            del_resp = rq.delete(API_URL_BASE + f"/{default_label}", headers=HEADERS)
+
+            print(
+                f"Default label '{default_label}' result: {del_resp.status_code} ({del_resp.reason}) ({'deleted' if del_resp.ok else 'not found'})"  # noqa: E501
+            )
+
+        # Cosmetic
+        print("")
+
+    # Adding the new labels
+    print("Adding the new labels...\n")
     labelsets = json.loads(Path("labels.json").read_text(encoding="utf-8"))
 
     for labelset in labelsets:
@@ -96,6 +126,8 @@ def main():
             print(
                 f"Label '{label_name}' result: {resp.status_code} ({resp.reason}) ({action})"  # noqa: E501
             )
+
+    print("\n...Done.\n")
 
 
 if __name__ == "__main__":
