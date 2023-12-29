@@ -112,7 +112,7 @@
                 "text": "Would love for someone to assist with this"
             },
             {
-                "icon": ":no_good",
+                "icon": ":no_good:",
                 "name": "yagni",
                 "text": "Will only be considered if folks express interest"
             }
@@ -127,11 +127,11 @@
                 "name": "merge ready"
             },
             {
-                "icon": ":round_pushpin",
+                "icon": ":round_pushpin:",
                 "name": "needs changelog"
             },
             {
-                "icon": ":page_with_curl",
+                "icon": ":page_with_curl:",
                 "name": "needs docs"
             },
             {
@@ -166,7 +166,7 @@
                 "text": "Something to add"
             },
             {
-                "icon": ":wrench",
+                "icon": ":wrench:",
                 "name": "maintenance",
                 "text": "Something administrative/internal needs upkeep"
             },
