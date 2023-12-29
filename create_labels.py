@@ -1,7 +1,6 @@
 import argparse as ap
 import json
 import os
-import sys
 from pathlib import Path
 
 import requests as rq
@@ -100,7 +99,4 @@ def main():
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        raise ValueError("No user/repo provided as CLI argument!")
-
     main()
