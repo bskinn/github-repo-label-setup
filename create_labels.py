@@ -1,3 +1,4 @@
+import argparse as ap
 import json
 import os
 import sys
@@ -6,7 +7,30 @@ from pathlib import Path
 import requests as rq
 
 
-def main(repo: str):
+def get_args():
+    prs = ap.ArgumentParser(
+        description="Utility to auto-apply a standard set of GitHub issue labels"
+    )
+
+    prs.add_argument(
+        "repo",
+        help="owner/repo to apply labels to, as '<owner>/<repo>'",
+    )
+    prs.add_argument(
+        "--delete-default",
+        help="Also delete the GitHub-default labels, if they exist",
+        action="store_true",
+        dest="delete_default",
+    )
+
+    return prs.parse_args()
+
+
+def main():
+    args = get_args()
+
+    repo = args.repo
+
     PAT = os.environ.get("GITHUB_PAT")
 
     HEADERS = {
@@ -79,4 +103,4 @@ if __name__ == "__main__":
     if len(sys.argv) != 2:
         raise ValueError("No user/repo provided as CLI argument!")
 
-    main(repo=sys.argv[1])
+    main()
