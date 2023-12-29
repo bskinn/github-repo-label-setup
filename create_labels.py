@@ -27,11 +27,19 @@ def get_args():
         "repo",
         help="owner/repo to apply labels to, as '<owner>/<repo>'",
     )
-    prs.add_argument(
+
+    meg_delete = prs.add_mutually_exclusive_group()
+    meg_delete.add_argument(
         "--delete-default",
         help="Also delete the GitHub-default labels, if they exist",
         action="store_true",
         dest="delete_default",
+    )
+    meg_delete.add_argument(
+        "--delete-only",
+        help="Delete any default GitHub labels without adding new ones",
+        action="store_true",
+        dest="delete_only",
     )
 
     return vars(prs.parse_args())
@@ -57,7 +65,7 @@ def main():
     print("")
 
     # Removing the old labels
-    if args["delete_default"]:
+    if args["delete_default"] or args["delete_only"]:
         print("Removing GitHub default labels...\n")
         for default_label in DEFAULT_LABELS:
             del_resp = rq.delete(
@@ -72,63 +80,64 @@ def main():
         print("")
 
     # Adding the new labels
-    print("Adding the new labels...\n")
-    labelsets = json.loads(Path("labels.json").read_text(encoding="utf-8"))
+    if not args["delete_only"]:
+        print("Adding the new labels...\n")
+        labelsets = json.loads(Path("labels.json").read_text(encoding="utf-8"))
 
-    for labelset in labelsets:
-        set_name = labelset["name"]
-        color = labelset["color"]
-        labels = labelset["labels"]
+        for labelset in labelsets:
+            set_name = labelset["name"]
+            color = labelset["color"]
+            labels = labelset["labels"]
 
-        for label in labels:
-            label_name = f"{set_name}: {label['name']} :{label['icon']}:"
+            for label in labels:
+                label_name = f"{set_name}: {label['name']} :{label['icon']}:"
 
-            get_resp = rq.get(
-                api_url_base + f"/{label_name}", headers=headers, timeout=30
-            )
+                get_resp = rq.get(
+                    api_url_base + f"/{label_name}", headers=headers, timeout=30
+                )
 
-            if get_resp.ok:
-                # Label found, so let's update in place, but only if
-                # we need to. We know the name isn't changing, so
-                # we only need to check the color and description
-                if (gr_json := get_resp.json())["description"] == label.get(
-                    "text", ""
-                ) and gr_json["color"] == color:
-                    resp = get_resp
-                    action = "unchanged"
+                if get_resp.ok:
+                    # Label found, so let's update in place, but only if
+                    # we need to. We know the name isn't changing, so
+                    # we only need to check the color and description
+                    if (gr_json := get_resp.json())["description"] == label.get(
+                        "text", ""
+                    ) and gr_json["color"] == color:
+                        resp = get_resp
+                        action = "unchanged"
+                    else:
+                        resp = rq.patch(
+                            api_url_base + f"/{label_name}",
+                            headers=headers,
+                            data=json.dumps(
+                                {
+                                    "new_name": label_name,
+                                    "description": f"{label.get('text', '')}",
+                                    "color": color,
+                                }
+                            ),
+                            timeout=30,
+                        )
+                        action = "updated"
                 else:
-                    resp = rq.patch(
-                        api_url_base + f"/{label_name}",
+                    # Not found, let's create
+                    resp = rq.post(
+                        api_url_base,
                         headers=headers,
                         data=json.dumps(
                             {
-                                "new_name": label_name,
+                                "name": label_name,
                                 "description": f"{label.get('text', '')}",
                                 "color": color,
-                            }
+                            },
                         ),
                         timeout=30,
                     )
-                    action = "updated"
-            else:
-                # Not found, let's create
-                resp = rq.post(
-                    api_url_base,
-                    headers=headers,
-                    data=json.dumps(
-                        {
-                            "name": label_name,
-                            "description": f"{label.get('text', '')}",
-                            "color": color,
-                        },
-                    ),
-                    timeout=30,
-                )
-                action = "created"
+                    action = "created"
 
-            print(
-                f"Label '{label_name}' result: {resp.status_code} ({resp.reason}) ({action})"  # noqa: E501
-            )
+                print(
+                    f"Label '{label_name}' result: {resp.status_code} ({resp.reason}) ({action})"  # noqa: E501
+                )
 
     print("\n...Done.\n")
 
