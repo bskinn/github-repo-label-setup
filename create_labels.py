@@ -17,6 +17,10 @@ DEFAULT_LABELS = [
     "wontfix",
 ]
 
+PRS_REPO = "repo"
+PRS_DEL_DEFAULT = "delete_default"
+PRS_DEL_ONLY = "delete_only"
+
 
 def get_args():
     prs = ap.ArgumentParser(
@@ -24,7 +28,7 @@ def get_args():
     )
 
     prs.add_argument(
-        "repo",
+        PRS_REPO,
         help="owner/repo to apply labels to, as '<owner>/<repo>'",
     )
 
@@ -33,13 +37,13 @@ def get_args():
         "--delete-default",
         help="Also delete the GitHub-default labels, if they exist",
         action="store_true",
-        dest="delete_default",
+        dest=PRS_DEL_DEFAULT,
     )
     meg_delete.add_argument(
         "--delete-only",
         help="Delete any default GitHub labels without adding new ones",
         action="store_true",
-        dest="delete_only",
+        dest=PRS_DEL_ONLY,
     )
 
     return vars(prs.parse_args())
@@ -48,7 +52,7 @@ def get_args():
 def main():
     args = get_args()
 
-    repo = args["repo"]
+    repo = args[PRS_REPO]
 
     gh_token = os.environ.get("GITHUB_PAT")
 
@@ -65,7 +69,7 @@ def main():
     print("")
 
     # Removing the old labels
-    if args["delete_default"] or args["delete_only"]:
+    if args[PRS_DEL_DEFAULT] or args[PRS_DEL_ONLY]:
         print("Removing GitHub default labels...\n")
         for default_label in DEFAULT_LABELS:
             del_resp = rq.delete(
@@ -80,7 +84,7 @@ def main():
         print("")
 
     # Adding the new labels
-    if not args["delete_only"]:
+    if not args[PRS_DEL_ONLY]:
         print("Adding the new labels...\n")
         labelsets = json.loads(Path("labels.json").read_text(encoding="utf-8"))
 
