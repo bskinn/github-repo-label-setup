@@ -3,35 +3,35 @@
         "color": "5319E7",
         "labels": [
             {
-                "icon": ":stethoscope:",
+                "icon": "stethoscope",
                 "name": "tests",
                 "text": "Focused on the test suite"
             },
             {
-                "icon": ":page_facing_up:",
+                "icon": "page_facing_up",
                 "name": "docs"
             },
             {
-                "icon": ":brain:",
+                "icon": "brain",
                 "name": "meta",
                 "text": "Dealing with the project itself"
             },
             {
-                "icon": ":bridge_at_night:",
+                "icon": "bridge_at_night",
                 "name": "infra",
                 "text": "Developer tooling"
             },
             {
-                "icon": ":gear:",
+                "icon": "gear",
                 "name": "ci",
                 "text": "Automated per-commit/per-PR tooling"
             },
             {
-                "icon": ":robot:",
+                "icon": "robot",
                 "name": "api"
             },
             {
-                "icon": ":computer:",
+                "icon": "computer",
                 "name": "cli"
             }
         ],
@@ -41,17 +41,17 @@
         "color": "B60205",
         "labels": [
             {
-                "icon": ":cloud:",
+                "icon": "cloud",
                 "name": "explanation",
                 "text": "Diátaxis: understanding-oriented"
             },
             {
-                "icon": ":building_construction:",
+                "icon": "building_construction",
                 "name": "howto",
                 "text": "Diátaxis: task-oriented"
             },
             {
-                "icon": ":books:",
+                "icon": "books",
                 "name": "reference",
                 "text": "Diátaxis: information-oriented"
             },
@@ -67,31 +67,31 @@
         "color": "BFDADC",
         "labels": [
             {
-                "icon": ":gemini:",
+                "icon": "gemini",
                 "name": "duplicate"
             },
             {
-                "icon": ":hourglass_flowing_sand:",
+                "icon": "hourglass_flowing_sand",
                 "name": "future",
                 "text": "Planned, but not for a specific release"
             },
             {
-                "icon": ":no_entry_sign:",
+                "icon": "no_entry_sign",
                 "name": "invalid",
                 "text": "We can't act on this issue, something's wrong"
             },
             {
-                "icon": ":thinking:",
+                "icon": "thinking",
                 "name": "maybe",
                 "text": "Being considered, but not certain"
             },
             {
-                "icon": ":watch:",
+                "icon": "watch",
                 "name": "planned",
                 "text": "Assigned to a specific version's milestone"
             },
             {
-                "icon": ":heavy_multiplication_x:",
+                "icon": "heavy_multiplication_x",
                 "name": "wontfix",
                 "text": "We've looked at this and unfortunately can't/won't"
             }
@@ -102,17 +102,17 @@
         "color": "DE26AD",
         "labels": [
             {
-                "icon": ":wave:",
+                "icon": "wave",
                 "name": "good first issue",
                 "text": "Welcome -- this is a great place to start contributing"
             },
             {
-                "icon": ":pray:",
+                "icon": "pray",
                 "name": "help wanted",
                 "text": "Would love for someone to assist with this"
             },
             {
-                "icon": ":no_good:",
+                "icon": "no_good",
                 "name": "yagni",
                 "text": "Will only be considered if folks express interest"
             }
@@ -123,19 +123,19 @@
         "color": "EB6420",
         "labels": [
             {
-                "icon": ":+1:",
+                "icon": "+1",
                 "name": "merge ready"
             },
             {
-                "icon": ":round_pushpin:",
+                "icon": "round_pushpin",
                 "name": "needs changelog"
             },
             {
-                "icon": ":page_with_curl:",
+                "icon": "page_with_curl",
                 "name": "needs docs"
             },
             {
-                "icon": ":heavy_check_mark:",
+                "icon": "heavy_check_mark",
                 "name": "needs tests"
             }
         ],
@@ -145,7 +145,7 @@
         "color": "FBCA04",
         "labels": [
             {
-                "icon": ":purple_square:",
+                "icon": "purple_square",
                 "name": "[placeholder]",
                 "text": "Update this and create more as needed"
             }
@@ -156,27 +156,27 @@
         "color": "1042CC",
         "labels": [
             {
-                "icon": ":beetle:",
+                "icon": "beetle",
                 "name": "bug",
                 "text": "Something is wrong"
             },
             {
-                "icon": ":sparkles:",
+                "icon": "sparkles",
                 "name": "enhancement",
                 "text": "Something to add"
             },
             {
-                "icon": ":wrench:",
+                "icon": "wrench",
                 "name": "maintenance",
                 "text": "Something administrative/internal needs upkeep"
             },
             {
-                "icon": ":grey_question:",
+                "icon": "grey_question",
                 "name": "question",
                 "text": "Something to investigate"
             },
             {
-                "icon": ":twisted_rightwards_arrows:",
+                "icon": "twisted_rightwards_arrows",
                 "name": "refactor",
                 "text": "Some code needs restructuring"
             }

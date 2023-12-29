@@ -41,7 +41,7 @@ def main(repo: str):
         labels = labelset["labels"]
 
         for label in labels:
-            label_name = f"{set_name}: {label['name']} {label['icon']}"
+            label_name = f"{set_name}: {label['name']} :{label['icon']}:"
 
             get_resp = rq.get(
                 API_URL_BASE + f"/{label_name}",
