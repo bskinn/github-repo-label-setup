@@ -42,16 +42,16 @@ def main():
 
     repo = args["repo"]
 
-    PAT = os.environ.get("GITHUB_PAT")
+    gh_token = os.environ.get("GITHUB_PAT")
 
-    HEADERS = {
+    headers = {
         "Accept": "application/vnd.github+json",
-        "Authorization": f"Bearer {PAT}",
+        "Authorization": f"Bearer {gh_token}",
         "X-GitHub-Api-Version": "2022-11-28",
         "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
     }
 
-    API_URL_BASE = f"https://api.github.com/repos/{repo}/labels"
+    api_url_base = f"https://api.github.com/repos/{repo}/labels"
 
     # Cosmetic
     print("")
@@ -60,7 +60,9 @@ def main():
     if args["delete_default"]:
         print("Removing GitHub default labels...\n")
         for default_label in DEFAULT_LABELS:
-            del_resp = rq.delete(API_URL_BASE + f"/{default_label}", headers=HEADERS)
+            del_resp = rq.delete(
+                api_url_base + f"/{default_label}", headers=headers, timeout=30
+            )
 
             print(
                 f"Default label '{default_label}' result: {del_resp.status_code} ({del_resp.reason}) ({'deleted' if del_resp.ok else 'not found'})"  # noqa: E501
@@ -82,8 +84,7 @@ def main():
             label_name = f"{set_name}: {label['name']} :{label['icon']}:"
 
             get_resp = rq.get(
-                API_URL_BASE + f"/{label_name}",
-                headers=HEADERS,
+                api_url_base + f"/{label_name}", headers=headers, timeout=30
             )
 
             if get_resp.ok:
@@ -97,8 +98,8 @@ def main():
                     action = "unchanged"
                 else:
                     resp = rq.patch(
-                        API_URL_BASE + f"/{label_name}",
-                        headers=HEADERS,
+                        api_url_base + f"/{label_name}",
+                        headers=headers,
                         data=json.dumps(
                             {
                                 "new_name": label_name,
@@ -106,13 +107,14 @@ def main():
                                 "color": color,
                             }
                         ),
+                        timeout=30,
                     )
                     action = "updated"
             else:
                 # Not found, let's create
                 resp = rq.post(
-                    API_URL_BASE,
-                    headers=HEADERS,
+                    api_url_base,
+                    headers=headers,
                     data=json.dumps(
                         {
                             "name": label_name,
@@ -120,6 +122,7 @@ def main():
                             "color": color,
                         },
                     ),
+                    timeout=30,
                 )
                 action = "created"
 
