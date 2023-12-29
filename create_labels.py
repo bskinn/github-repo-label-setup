@@ -22,13 +22,13 @@ def get_args():
         dest="delete_default",
     )
 
-    return prs.parse_args()
+    return vars(prs.parse_args())
 
 
 def main():
     args = get_args()
 
-    repo = args.repo
+    repo = args["repo"]
 
     PAT = os.environ.get("GITHUB_PAT")
 
