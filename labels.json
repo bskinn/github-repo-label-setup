@@ -28,11 +28,18 @@
             },
             {
                 "icon": "robot",
-                "name": "api"
+                "name": "api",
+                "text": "Library interface that others will use"
             },
             {
                 "icon": "computer",
-                "name": "cli"
+                "name": "cli",
+                "text": "Command-line interface that others will use"
+            },
+            {
+                "icon": "slot_machine",
+                "name": "internals",
+                "text": "The inner workings"
             }
         ],
         "name": "area"
