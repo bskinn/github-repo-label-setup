@@ -54,14 +54,17 @@ My take on her approach boils down to these aspects:
   - This allows for quick recognition of specific, individual labels.
 - Label names should nearly always be short. If additional explanation is
   needed, put it in the `description` field.
-- Some categories will naturally tend to only have one label apply per ticket;
-  others will naturally allow multiple labels per ticket.
+- Some categories will naturally tend to only have one label apply per ticket
+  (e.g., `type`); others will naturally allow multiple labels per ticket (e.g.,
+  `area`).
 - In rare cases, labels may have a different color from the rest of their
   category, when special emphasis is called for.
   - A good example here is `pr: DO NOT MERGE ❌`, which one might color in bright
     red so that it stands out.
 - In extremely rare cases, a label might not reside in any category.
   - I actually can't think of any examples of this offhand.
+
+### Specific Categories
 
 The categories that make sense to me at this time, and thus the ones included in
 the built-in `labels.json` config, are:
