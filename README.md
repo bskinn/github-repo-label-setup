@@ -10,7 +10,7 @@ Get the labels you need in a few steps:
    your terminal as the `GITHUB_PAT` environment variable.
 2. Clone this repo.
 3. Create a virtual environment (Python 3.11+), activate, and
-   `pip install -r requirements.txt`.
+   `python -m pip install -r requirements.txt`.
 4. Edit `labels.json` to define the labels you want to create.
 5. Run `python create_labels.py <owner>/<repo`
 
