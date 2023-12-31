@@ -57,7 +57,7 @@ My take on her approach boils down to these aspects:
 - Some categories will naturally tend to only have one label apply per ticket
   (e.g., `type`); others will naturally allow multiple labels per ticket (e.g.,
   `area`).
-- In rare cases, labels may have a different color from the rest of their
+- In rare cases, a label may have a different color from the rest of its
   category, when special emphasis is called for.
   - A good example here is `pr: DO NOT MERGE ❌`, which one might color in bright
     red so that it stands out.
@@ -90,9 +90,10 @@ the built-in `labels.json` config, are:
     _community_ to think about the ticket.
   - The default labels in this category, `meta: good first issue`,
     `meta: help wanted`, and `meta: yagni` help to illustrate its community
+    focus.
 - `pr` - Status labels specific to pull requests, highlighting actions that are
-  orientation. still required on a PR before it is ready for merge; or,
-  highlighting its merge-ready status.
+  still required on a PR before it is ready for merge; or, highlighting its
+  merge-ready status.
 - `topic` - This is the category that is most idiosyncratic to each project, and
   the most likely to cross-cut the other categories. They collect together
   tickets with a common topic/theme, assisting with quick searches on that
