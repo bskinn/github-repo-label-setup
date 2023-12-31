@@ -21,9 +21,9 @@ And done!
 `repo-label-creator` created most of the [labels on its own repository][own labels].
 
 If you want to curate your own set of preferred labels in `labels.json`, then
-fork the repo first and push your changes to the labels on your fork. If you'd
-like to be able to curate your own `labels.json` elsewhere and point
-`repo-label-creator` at it, please say so at [#2].
+fork the repo first, edit `labels.json` to your liking, and push your changes to
+your fork. If you'd like to be able to curate your own `labels.json` elsewhere
+and point `repo-label-creator` at it, please say so at [#2].
 
 For now, this code is not packaged for distribution on PyPI. If you'd like to be
 able to pip install it, please say so at [#5].
@@ -33,28 +33,29 @@ able to pip install it, please say so at [#5].
 
 ### Background
 
-GitHub's labeling features for issues and PRs are powerful and convenient. For
-projects of substantial size, though, a structured approach to organizing and
-formatting the labels is important to maximize value and usability.
+GitHub's labeling features for issues and PRs are quite helpful for organizing
+tickets. For projects of substantial size, though, a structured approach to
+organizing and formatting the labels is important to maximize value and
+usability.
 
 While working on the [Quansight Labs website][labs site] I was exposed to
 [Tania Allard]'s style of GitHub label management, and liked it a lot. Check out
-the [repo's labels][labs site labels] for an example.
+the [labels in the Labs site repo][labs site labels] for an example.
 
 My take on her approach boils down to these aspects:
 
 - All labels should be sorted into a small number of broader, named categories.
   - E.g., `area`, `topic`, `type`
-- Each label should include its category name.
+- Each label should include its category name as well as its own name.
   - This unambiguously associates the label with its category.
 - All labels in each category should have the same color.
-  - This facilitates rapid recognition of the category/type of the label.
-- Some categories will naturally tend to only have one label apply per ticket;
-  others will naturally have multiple labels per ticket, in some cases.
+  - This facilitates rapid recognition of the category of the label.
 - Each label should have a unique emoji as part of its name.
   - This allows for quick recognition of specific, individual labels.
 - Label names should nearly always be short. If additional explanation is
   needed, put it in the `description` field.
+- Some categories will naturally tend to only have one label apply per ticket;
+  others will naturally allow multiple labels per ticket.
 - In rare cases, labels may have a different color from the rest of their
   category, when special emphasis is called for.
   - A good example here is `pr: DO NOT MERGE ❌`, which one might color in bright
