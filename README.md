@@ -101,9 +101,9 @@ the built-in `labels.json` config, are:
   - When a `topic` label is applied to a sufficient number of tickets, it can be
     a signal that it might be time to create a milestone, a project, or some
     other heavier-weight organizational tool to manage those tickets.
-- `type` - This category holds labels that sort tickets according to the overall
-  nature of the change to the codebase/repository. Is it fixing a problem?
-  Adding a feature? Performing maintenance, or refactoring code?
+- `type` - This category holds labels whose role is to sort tickets according to
+  the overall nature of the change to the codebase/repository. Is it fixing a
+  problem? Adding a feature? Performing maintenance, or refactoring code?
   - In nearly all cases, there should be _exactly one_ `type` label applied to a
     ticket.
 
@@ -115,7 +115,7 @@ its own categories and labels according to its needs.
 
 ### Motivation
 
-I've since rolled out a similar approach to the above to a handful of my repos,
+I've rolled out a similar approach to the above to a handful of my repos,
 and it's worked quite well for me. I have a much easier time choosing which
 labels to apply to most tickets, since the categories are a natural
 multi-dimensional 'coordinate system' in which to locate things.
@@ -129,8 +129,8 @@ mechanisms for labels... it's a one-at-a-time, manual process the whole way.
 didn't find any on an initial search. I'd be delighted to learn of any; please
 [open a new ticket] to clue me in.)
 
-So, I took the time it would have required to manually create this initial label
-set on a handful of repos and instead wrote a thing that would apply them onto
+So, I took the time it would have taken me to manually create this initial label
+set on a handful of repos, and instead wrote a thing that would apply them onto
 any repo. And, here we are!
 
 
@@ -193,7 +193,7 @@ class LabelsJSON:
 
 GitHub exposes an [API] for listing, retrieving, creating, updating, and
 deleting labels from a repository. All interactions with the labels list of the
-target repository are achieved using this API.
+target repository are achieved using `requests` calls to this API.
 
 
 [#2]: https://github.com/bskinn/repo-label-creator/issues/2
