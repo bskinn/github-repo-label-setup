@@ -50,6 +50,8 @@ My take on her approach boils down to these aspects:
   - This unambiguously associates the label with its category.
 - All labels in each category should have the same color.
   - This facilitates rapid recognition of the category of the label.
+  - When possible, colors should be chosen for maximum accessibility for those
+    with color-blindness.
 - Each label should have a unique emoji as part of its name.
   - This allows for quick recognition of specific, individual labels.
 - Label names should nearly always be short. If additional explanation is
